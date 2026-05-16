@@ -1,0 +1,215 @@
+/* ════════════════════════════════════════════════════
+   RESET Y VARIABLES GLOBALES
+════════════════════════════════════════════════════ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Superficies */
+    --bg:           #0e1117;
+    --surface:      #161b22;
+    --surface-2:    #1c2128;
+    --border:       #30363d;
+
+    /* Texto */
+    --text:         #e6edf3;
+    --text-muted:   #8b949e;
+
+    /* Colores de columna */
+    --color-todo:     #58a6ff;
+    --color-progress: #d29922;
+    --color-done:     #3fb950;
+
+    --font: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: var(--font);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+
+/* ════════════════════════════════════════════════════
+   HEADER DE LA APP
+════════════════════════════════════════════════════ */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icono {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--color-todo), var(--color-done));
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* ── Botón agregar tarjeta en columna ────────────── */
+.btn-agregar-tarjeta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 9px 12px;
+    background: transparent;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-agregar-tarjeta:hover {
+    background: var(--surface-2);
+    color: var(--text);
+    border-color: var(--color-todo);
+}
+
+.logo-nombre {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+}
+
+.logo-nombre span {
+    color: var(--color-todo);
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sprint-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+}
+
+.equipo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Avatares apilados en el header */
+.equipo-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    margin-left: -8px;
+}
+
+.equipo-avatar:first-child { margin-left: 0; }
+.avatar-ana     { background: linear-gradient(135deg, #667eea, #764ba2); }
+.avatar-luis    { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.avatar-carlos  { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.avatar-sara    { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+.equipo-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: 6px;
+}
+
+
+/* ════════════════════════════════════════════════════
+   ZONA SUPERIOR DEL TABLERO
+════════════════════════════════════════════════════ */
+.board-meta {
+    padding: 24px 32px 0 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.board-titulo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+}
+
+.board-subtitulo {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.barra-busqueda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: var(--font);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+
+/* ════════════════════════════════════════════════════
+   TABLERO PRINCIPAL — CONTENEDOR DE COLUMNAS
+════════════════════════════════════════════════════ */
+.tablero {
+    display: flex;
+    gap: 18px;
+    padding: 24px 32px 32px 32px;
+    overflow-x: auto;
+    align-items: flex-start;
+}
+
+/* Cada <kanban-column> ocupa un ancho fijo en el tablero */
+kanban-column {
+    flex: 0 0 290px;
+}
+
+/* Scrollbar discreta para el tablero */
+.tablero::-webkit-scrollbar { height: 6px; }
+.tablero::-webkit-scrollbar-track { background: transparent; }
+.tablero::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBoard</title>
+
+    <!-- Fuente principal: Outfit — moderna, legible y perfecta para interfaces -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════════════ -->
+    <header class="app-header">
+
+        <div class="logo">
+            <!-- Icono: tablero Kanban (cuadrícula de columnas) -->
+            <div class="logo-icono">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="5" height="18" rx="1"/>
+                    <rect x="10" y="3" width="5" height="11" rx="1"/>
+                    <rect x="17" y="3" width="4" height="15" rx="1"/>
+                </svg>
+            </div>
+            <span class="logo-nombre">Dev<span>Board</span></span>
+        </div>
+
+        <div class="header-info">
+            <!-- Reloj en tiempo real — app.js actualiza #reloj-live cada segundo -->
+            <span class="sprint-badge" id="reloj-live">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:5px; flex-shrink:0">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span id="reloj-texto"></span>
+            </span>
+            <div class="equipo">
+                <div class="equipo-avatar avatar-ana">AT</div>
+                <div class="equipo-avatar avatar-luis">LM</div>
+                <div class="equipo-avatar avatar-carlos">CR</div>
+                <div class="equipo-avatar avatar-sara">SB</div>
+                <span class="equipo-label">4 integrantes</span>
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         META DEL TABLERO
+    ══════════════════════════════════════════════════════ -->
+    <div class="board-meta">
+        <div>
+            <h1 class="board-titulo">Tablero del equipo</h1>
+            <p class="board-subtitulo">Proyecto: Plataforma de gestión de usuarios · MVP v1.0</p>
+        </div>
+        <!-- Icono: lupa de búsqueda -->
+        <div class="barra-busqueda">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Buscar tarea...
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         TABLERO PRINCIPAL
+         Cada <kanban-column> recibe:
+           · titulo → nombre visible de la columna
+           · color  → color del encabezado
+         Cada <kanban-card> dentro recibe:
+           · titulo, responsable, prioridad
+    ══════════════════════════════════════════════════════ -->
+    <main class="tablero">
+
+
+        <!-- ── Columna 1: Por hacer ──────────────────────── -->
+        <kanban-column titulo="Por hacer" color="#58a6ff">
+
+            <kanban-card
+                titulo="Diseñar pantalla de login"
+                responsable="Ana Torres"
+                prioridad="alta">
+            </kanban-card>
+
+            <kanban-card
+                titulo="Documentar endpoints de la API"
+                responsable="Carlos Ruiz"
+                prioridad="baja">
+            </kanban-card>
+
+            <kanban-card
+                titulo="Crear wireframes del dashboard"
+                responsable="Sara Blanco"
+                prioridad="media">
+            </kanban-card>
+
+            <!-- Botón para agregar nueva tarjeta a esta columna -->
+            <button class="btn-agregar-tarjeta">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Agregar tarjeta
+            </button>
+
+        </kanban-column>
+
+
+        <!-- ── Columna 2: En progreso ─────────────────────── -->
+        <kanban-column titulo="En progreso" color="#d29922">
+
+            <kanban-card
+                titulo="Conectar autenticación de usuarios"
+                responsable="Luis Mora"
+                prioridad="alta">
+            </kanban-card>
+
+            <kanban-card
+                titulo="Revisar y aprobar pull requests"
+                responsable="Ana Torres"
+                prioridad="media">
+            </kanban-card>
+
+            <!-- Botón para agregar nueva tarjeta a esta columna -->
+            <button class="btn-agregar-tarjeta">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Agregar tarjeta
+            </button>
+
+        </kanban-column>
+
+
+        <!-- ── Columna 3: Listo ───────────────────────────── -->
+        <kanban-column titulo="Listo" color="#3fb950">
+
+            <kanban-card
+                titulo="Configurar repositorio en GitHub"
+                responsable="Luis Mora"
+                prioridad="baja">
+            </kanban-card>
+
+            <kanban-card
+                titulo="Definir paleta de colores del proyecto"
+                responsable="Sara Blanco"
+                prioridad="baja">
+            </kanban-card>
+
+            <kanban-card
+                titulo="Levantar entorno de desarrollo local"
+                responsable="Carlos Ruiz"
+                prioridad="media">
+            </kanban-card>
+
+            <!-- Botón para agregar nueva tarjeta a esta columna -->
+            <button class="btn-agregar-tarjeta">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Agregar tarjeta
+            </button>
+
+        </kanban-column>
+
+
+    </main>
+
+
+    <!-- Los componentes se cargan primero, luego la lógica de interacción -->
+    <script src="js/KanbanCard.js"></script>
+    <script src="js/KanbanColumn.js"></script>
+    <!-- app.js: drag & drop y creación de tarjetas (cargado al final) -->
+    <script src="js/app.js"></script>
+
+</body>
+</html>
